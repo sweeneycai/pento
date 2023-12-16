@@ -1,15 +1,28 @@
-defmodule PentoWeb.Live.WrongLive do
+defmodule PentoWeb.WrongLive do
+
   use Phoenix.LiveView, layout: {PentoWeb.Layouts, :app}
 
   def mount(_params, _session, socket) do
+    # user = Accounts.get_user_by_session_token(session["user_token"])
     if connected?(socket), do: :timer.send_interval(1000, self(), :tick)
 
-    {:ok, assign(socket, score: 0, message: "Make a guess:", time: time(), guess_number: next_guess())}
+    {
+      :ok, 
+      assign(
+        socket, 
+        score: 0, 
+        message: "Make a guess:", 
+        time: time(), 
+        guess_number: next_guess()
+        # session_id: session["live_socket_id"]
+        # current_user: user
+      )
+    }
   end
 
   def render(assigns) do
     ~H"""
-    <h1>Your score: <%= @score %> </h1>
+    <h1 class="mb-4 text-4xl font-extrabold">Your score: <%= @score %> </h1>
     <h2>
       <%= @message %>
       It's <%= @time %>
@@ -24,6 +37,11 @@ defmodule PentoWeb.Live.WrongLive do
       <% end %>
     </h2>
     <h2>The truth is <%= @guess_number %> </h2>
+
+    <pre>
+      <%!-- <%= @current_user.email %> --%>
+      <%= @session_id %>
+    </pre>
     """
   end
 

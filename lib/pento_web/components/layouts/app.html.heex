@@ -8,6 +8,7 @@
         v<%= Application.spec(:phoenix, :vsn) %>
       </p>
     </div>
+
     <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
       <a href="https://twitter.com/elixirphoenix" class="hover:text-zinc-700">
         @elixirphoenix
@@ -21,6 +22,33 @@
       >
         Get Started <span aria-hidden="true">&rarr;</span>
       </a>
+      <%= if @current_user do %>
+        <.link
+          href={~p"/users/settings"}
+          class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80"
+        >
+          <%!-- <%= @current_user.email %> --%>
+          Settings
+        </.link>
+        <.link
+          href={~p"/users/log_out"}
+          method="delete"
+          class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80"
+        >
+        Sign out
+        </.link>
+        <button class="relative z-10 block h-8 w-8 rounded-full overflow-hidden border-2 border-grey-600 focus:outline-none focus:border-white">
+          <img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1631013747231-606e848485fe?q=80&w=3776&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Your avator">
+          <%!-- <%= @current_user.email %> --%>
+        </button>
+      <% else %>
+        <.link
+          href={~p"/users/log_in"}
+          class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80"
+        >
+          Log in
+        </.link>
+      <% end %>
     </div>
   </div>
 </header>
