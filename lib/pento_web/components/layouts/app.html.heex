@@ -12,6 +12,12 @@
     <div class="flex items-center gap-4 font-semibold leading-6 text-zinc-900">
       <%= if @current_user do %>
         <.link
+          href={~p"/admin/dashboard"}
+          class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80"
+        >
+          Dashboard
+        </.link>
+        <.link
           href={~p"/products"}
           class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80"
         >
@@ -27,7 +33,6 @@
           href={~p"/users/settings"}
           class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80"
         >
-          <%!-- <%= @current_user.email %> --%>
           Settings
         </.link>
         <.link
@@ -35,7 +40,7 @@
           method="delete"
           class="rounded-lg bg-zinc-100 px-2 py-1 hover:bg-zinc-200/80"
         >
-        Sign out
+          Sign out
         </.link>
         <button class="relative z-10 block h-8 w-8 rounded-full overflow-hidden border-2 border-grey-600 focus:outline-none focus:border-white">
           <img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1631013747231-606e848485fe?q=80&w=3776&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Your avator">
