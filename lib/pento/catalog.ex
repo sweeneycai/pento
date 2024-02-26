@@ -4,9 +4,10 @@ defmodule Pento.Catalog do
   """
 
   import Ecto.Query, warn: false
-  alias Pento.Repo
 
+  alias Pento.Repo
   alias Pento.Catalog.Product
+
 
   @doc """
   Returns the list of products.
@@ -119,7 +120,29 @@ defmodule Pento.Catalog do
     |> Repo.update()
   end
 
+  def products_with_zero_ratings() do
+    Product.Query.with_zero_ratings()
+    |> Repo.all()
+  end
+
   def list_products_with_user_rating(user) do
     Product.Query.with_user_ratings(user) |> Repo.all()    
+  end
+
+  def products_with_avg_ratings() do
+    Product.Query.with_avg_ratings()
+    |> Repo.all()
+  end
+
+  def products_with_avg_ratings(%{age_group_filter: age_group_filter}) do
+    Product.Query.with_avg_ratings()
+    |> Product.Query.filter_by_age_group(age_group_filter)
+    |> Repo.all()
+  end
+
+  def products_with_avg_ratings(%{gender_filter: gender_filter}) do
+    Product.Query.with_avg_ratings()
+    |> Product.Query.filter_by_gender(gender_filter)
+    |> Repo.all()
   end
 end
