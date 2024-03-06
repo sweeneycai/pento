@@ -46,8 +46,8 @@ defmodule PentoWeb.PromoLive do
 
   def handle_event(
         "save",
-        %{"recipient" => recipient_params},
-        %{assigns: %{recipient: recipient}} = socket
+        %{"recipient" => _recipient_params},
+        %{assigns: %{recipient: _recipient}} = _socket
       ) do
     :timer.sleep(2000)
   end
